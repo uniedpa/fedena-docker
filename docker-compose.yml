@@ -1,14 +1,15 @@
-services:
-  db:
-    image: mysql
-    environment:
-    - MYSQL_ROOT_PASSWORD=root
-  web:
-    image: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
+db:
+  image: mysql
+  environment:
+  - MYSQL_ROOT_PASSWORD=root
+  ports:
+    - "3306:3333"
+web:
+  image: .
+  command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  volumes:
+    - .:/myapp
+  ports:
+    - "3000:3000"
+  depends_on:
+    - db
